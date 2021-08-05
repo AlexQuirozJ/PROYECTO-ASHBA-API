@@ -1,11 +1,15 @@
 package com.init.products.rest;
 
+import java.awt.print.Pageable;
+
 import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.data.domain.Page;
+//import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -121,19 +125,135 @@ public class producsREST {
 			}
 		
 		
-		//--------------------METODO PARA CONSULTAR POR CATEGORIAS Y POR ORDER BY------------------------
-		//localhost:8080/products/query?Categoria=BOCINAS
-		@GetMapping("/query")
-		public ArrayList<Product>getProductByCategoria(@RequestParam (value="Categoria", defaultValue="")String categoria, Sort sort){
-			return productDAO.findByOrderByCategoriaDesc(categoria, sort);
-		}
-		
 		//---------METODO PARA QUE BUSQUE EN LA BARRA Y AUTOCOMPLETE Y ORDENE POR MENOR PRECIO-----------
 		//localhost:8080/products/query/?name=kaiser
 		@GetMapping("/query/")
 		public ArrayList<Product> getProductByNameIgnoreCase(@RequestParam (value="name", defaultValue="")String name, Sort sort){
 			return productDAO.findByNameLikeIgnoreCase(name, sort);
 		}
+						
+				
+		//--------------------METODO PARA CONSULTAR POR CATEGORIAS COMPUTADORAS - ORDER BY Y BETWEEN------------------------
+		//localhost:8080/products/computadoras1?Categoria=COMPUTADORAS&precio=4000&precio2=10000
+		@GetMapping("/computadoras1")
+		public ArrayList<Product>getProductByCategoriaBetween(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+			return productDAO.findByOrderByCategoriaBetweenDesc(categoria, precio, precio2, sort);
+		}	
+		
+		//localhost:8080/products/computadoras2?Categoria=COMPUTADORAS&precio=10001&precio2=20000
+		@GetMapping("/computadoras2")
+		public ArrayList<Product>getProductByCategoria1Between(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+			return productDAO.findByOrderByCategoria1BetweenDesc(categoria, precio, precio2, sort);
+		}	
+		
+		//localhost:8080/products/computadoras3?Categoria=COMPUTADORAS&precio=20001&precio2=50000
+		@GetMapping("/computadoras3")
+		public ArrayList<Product>getProductByCategoria12Between(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+		return productDAO.findByOrderByCategoria12BetweenDesc(categoria, precio, precio2, sort);
+		}	
+		
+		
+		//--------------------METODO PARA CONSULTAR POR CATEGORIAS CELULARES - ORDER BY Y BETWEEN------------------------
+		//localhost:8080/products/celulares1?Categoria=CELULARES&precio=2000&precio2=6000
+		@GetMapping("/celulares1")
+		public ArrayList<Product>getProductByCategoriaC1Between(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+		return productDAO.findByOrderByCategoriaC1BetweenDesc(categoria, precio, precio2, sort);
+		}	
+				
+		//localhost:8080/products/celulares2?Categoria=CELULARES&precio=6001&precio2=12000
+		@GetMapping("/celulares2")
+		public ArrayList<Product>getProductByCategoriaC2Between(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+		return productDAO.findByOrderByCategoriaC2BetweenDesc(categoria, precio, precio2, sort);
+		}	
+				
+		//localhost:8080/products/celulares3?Categoria=CELULARES&precio=12000&precio2=50000
+		@GetMapping("/celulares3")
+		public ArrayList<Product>getProductByCategoriaC3Between(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+		return productDAO.findByOrderByCategoriaC3BetweenDesc(categoria, precio, precio2, sort);
+		}	
+		
+		
+		//--------------------METODO PARA CONSULTAR POR CATEGORIAS TABLETAS - ORDER BY Y BETWEEN------------------------
+		//localhost:8080/products/tablets1?Categoria=TABLETAS&precio=20001&precio2=6000
+		@GetMapping("/tablets1")
+		public ArrayList<Product>getProductByCategoriat1Between(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+		return productDAO.findByOrderByTablets1BetweenDesc(categoria, precio, precio2, sort);
+		}	
+						
+		//localhost:8080/products/tablets2?Categoria=TABLETAS&precio=20001&precio2=6000
+		@GetMapping("/tablets2")
+		public ArrayList<Product>getProductByCategoriat2Between(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+		return productDAO.findByOrderByTablets2BetweenDesc(categoria, precio, precio2, sort);
+		}	
+						
+		//llocalhost:8080/products/tablets3?Categoria=TABLETAS&precio=20001&precio2=6000
+		@GetMapping("/tablets3")
+		public ArrayList<Product>getProductByCategoriat3Between(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+		return productDAO.findByOrderByTablets3BetweenDesc(categoria, precio, precio2, sort);
+		}	
+		
+		//--------------------METODO PARA CONSULTAR POR CATEGORIAS PANTALLAS - ORDER BY Y BETWEEN------------------------
+		//localhost:8080/products/pantallas1?Categoria=PANTALLAS&precio=20001&precio2=6000
+		@GetMapping("/pantallas1")
+		public ArrayList<Product>getProductByCategoriaP1Between(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+		return productDAO.findByOrderByPantallas1BetweenDesc(categoria, precio, precio2, sort);
+		}	
+								
+		//localhost:8080/products/pantallas2?Categoria=PANTALLAS&precio=20001&precio2=6000
+		@GetMapping("/pantallas2")
+		public ArrayList<Product>getProductByCategoriaP2Between(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+		return productDAO.findByOrderByPantallas2BetweenDesc(categoria, precio, precio2, sort);
+		}	
+								
+		//localhost:8080/products/pantallas3?Categoria=PANTALLAS&precio=20001&precio2=6000
+		@GetMapping("/pantallas3")
+		public ArrayList<Product>getProductByCategoriaP3Between(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+		return productDAO.findByOrderByPantallas3BetweenDesc(categoria, precio, precio2, sort);
+		}	
+		
+		
+		//--------------------METODO PARA CONSULTAR POR CATEGORIAS IMPRESORAS - ORDER BY Y BETWEEN------------------------
+		//localhost:8080/products/impresoras1?Categoria=IMPRESORAS&precio=20001&precio2=6000
+		@GetMapping("/impresoras1")
+		public ArrayList<Product>getProductByCategoriaI1Between(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+		return productDAO.findByOrderByImpresoras1BetweenDesc(categoria, precio, precio2, sort);
+		}	
+										
+		//localhost:8080/products/impresoras2?Categoria=IMPRESORAS&precio=20001&precio2=6000
+		@GetMapping("/impresoras2")
+		public ArrayList<Product>getProductByCategoriaI2Between(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+		return productDAO.findByOrderByImpresoras2BetweenDesc(categoria, precio, precio2, sort);
+		}	
+										
+		//localhost:8080/products/impresoras3?Categoria=IMPRESORAS&precio=20001&precio2=6000
+		@GetMapping("/impresoras3")
+		public ArrayList<Product>getProductByCategoriaI3Between(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+		return productDAO.findByOrderByImpresoras3BetweenDesc(categoria, precio, precio2, sort);
+		}	
+		
+		//--------------------METODO PARA CONSULTAR POR CATEGORIAS AURICULARES - ORDER BY Y BETWEEN------------------------
+		//localhost:8080/products/auriculares1?Categoria=AURICULARES&precio=20001&precio2=6000
+		@GetMapping("/auriculares1")
+		public ArrayList<Product>getProductByCategoriaIABetween(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+		return productDAO.findByOrderByAuriculares1BetweenDesc(categoria, precio, precio2, sort);
+		}	
+												
+		//localhost:8080/products/auriculares2?Categoria=AURICULARES&precio=20001&precio2=6000
+		@GetMapping("/auriculares2")
+		public ArrayList<Product>getProductByCategoriaA2Between(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+		return productDAO.findByOrderByAuriculares2BetweenDesc(categoria, precio, precio2, sort);
+		}	
+												
+		//localhost:8080/products/auriculares3?Categoria=AURICULARES&precio=20001&precio2=6000
+		@GetMapping("/auriculares3")
+		public ArrayList<Product>getProductByCategoriaA3Between(@RequestParam (value="Categoria", defaultValue="")String categoria, int precio, int precio2, Sort sort){
+		return productDAO.findByOrderByAuriculares3BetweenDesc(categoria, precio, precio2, sort);
+		}
+		
+
+	}
+		
+		
 		
 			
 			
@@ -162,7 +282,35 @@ public class producsREST {
 			//return productDAO.findByName(name);
 		//}
 		
+		//METODO PARA BUSCAR POR PRECIO 1000-3000
+		//localhost:8080/products/precio/?precio=100&precio2=3000
+		//@GetMapping("/precio/")
+		//public ArrayList<Product> precio(@RequestParam(value = "precio" , defaultValue = "100")int precio,
+		      //  @RequestParam (value ="precio")int precio2) {
+		//return productDAO.findPrecioBetween(precio, precio2);
+			
+			
+		//}
+	
+		//METODO PARA BUSCAR POR CATEGORIA Y BETWEEN- ASÍ DEBEMOS DUPLICAR EL DE ABAJO
+		//localhost:8080/products/precioo/?precio=3001&precio2=6000
+				//@GetMapping("/precioo/")
+				//public ArrayList<Product> precio2(@RequestParam(value = "precio" , defaultValue = "")int precio,
+				  //@RequestParam (value ="precio")int precio2) {
+				//return productDAO.findPrecio2Between(precio, precio2);
+					
+					
+		//}
 		
-	}
+		//--------------------METODO PARA CONSULTAR POR CATEGORIAS Y POR ORDER BY------------------------
+		//localhost:8080/products/query?Categoria=BOCINAS
+		//@GetMapping("/query")
+		//public ArrayList<Product>getProductByCategoria(@RequestParam (value="Categoria", defaultValue="")String categoria, Sort sort){
+		//return productDAO.findByOrderByCategoriaDesc(categoria, sort);
+		//}
+
+		
+		
+	
 
 
