@@ -1,0 +1,14 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+      dialect: org.hibernate.dialect.MySQL5Dialect
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver   
+    url: jdbc:mysql://db4free.net:3306/productsapi1?zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    username: rootalex3579
+    password: root3579
+ 
+    
